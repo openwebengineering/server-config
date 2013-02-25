@@ -1,4 +1,12 @@
+#!/bin/bash
+# Written by AJ Bahnken / ajvb
+# Maintained by OpenWeb Engineering / openwebengineering.com
+
 echo "Running OpenWeb Engineering's Server Python Essential's Script"
+echo "Written by AJ Bahnken"
+echo ''
+#Initial .bashrc edit
+echo '' >> ~/.bashrc
 
 #Initial Installs
 echo "Installing python-dev, python-setuptools, python-distutils-extra, ipython, and pip"
@@ -16,9 +24,8 @@ pip install virtualenvwrapper
 
 #Setup
 echo "Setting up virtualenvwrapper"
-export WORKON_HOME=~/.virtualenvs
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.bashrc
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python" >> ~/.bashrc
 mkdir ~/.virtualenvs
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
-source /usr/local/bin/virtualenvwrapper.sh
-
+source ~/.bashrc
