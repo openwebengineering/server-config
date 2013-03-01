@@ -1,4 +1,4 @@
-sudo apt-get install \
+apt-get install \
     python-dev \
     python-setuptools \
     python-distutils-extra \
