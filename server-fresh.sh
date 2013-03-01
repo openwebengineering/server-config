@@ -11,3 +11,5 @@ echo 'export GOROOT=$HOME/go' >> ~/.bashrc
 echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.bashrc
 source ~/.bashrc
 
+mkdir ~/bin
+curl http://defunkt.io/hub/standalone -sLo ~/bin/hub && chmod +x ~/bin/hub
