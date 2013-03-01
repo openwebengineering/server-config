@@ -8,5 +8,5 @@ echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | 
 apt-get -y update
 apt-get -y install mongodb-10gen
 
-apt-get -y install virtualenv
+apt-get -y install python-virtualenv
 pip install virtualenvwrapper
