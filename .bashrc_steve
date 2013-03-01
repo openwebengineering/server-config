@@ -1,0 +1,73 @@
+alias ll='ls -l'
+alias lS='ls -lSrh'
+alias lT='ls -ltrh'
+
+alias dj='cd ~/django_projects'
+alias drun='python manage.py runserver'
+alias em='emacsclient -t'
+alias emb='emacsclient -t ~/.bashrc'
+#alias gae='export PATH=~/Dropbox/programming/google_appengine:$PATH'
+alias git='~/bin/hub'
+alias gorigin='git remote show origin -n'
+alias grepr='grep -r'
+alias neh='sudo nano /etc/hosts'
+#alias rap='sudo apachectl graceful'
+alias rap='sudo service nginx reload'
+alias rapp='sudo service nginx restart'
+alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
+alias rot47="tr '!-~' 'P-~!-O'"
+alias s="source ~/.bashrc"
+
+alias les="cut -d: -f1 | awk '{print $1}' | xargs less"
+alias mkvirtualenv='mkvirtualenv --no-site-packages'
+alias pg='ping google.com'
+alias pv='ping 4.2.2.2' #ping Verizon's DNS
+alias sai='sudo apt-get install'
+alias sau='sudo apt-get update'
+
+export EDITOR='emacsclient -t'
+
+#export GOROOT=$HOME/Dropbox/programming/go
+#export GOBIN=$GOROOT/bin
+export GOARCH=amd64
+export GOOS=linux
+export GOPATH=~/gocode
+
+export HISTSIZE=1000000
+export PROMPT_COMMAND='history -a'
+shopt -s histappend
+
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh 
+
+#export PATH=~/Dropbox/programming/google_appengine:$PATH
+
+export PATH=$PATH:~/bin
+
+
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+xterm-color)
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    ;;
+*)
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    ;;
+esac
+
+# Comment in the above and uncomment this below for a color prompt
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    ;;
+*)
+    ;;
+esac
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
