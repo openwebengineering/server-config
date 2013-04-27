@@ -2,8 +2,8 @@
 # Written by AJ Bahnken / ajvb
 # Maintained by OpenWeb Engineering / openwebengineering.com
 
-echo "Running OpenWeb Engineering's Server Python Essential's Script"
-echo "Written by AJ Bahnken"
+# "Running OpenWeb Engineering's Server Python Essentials Script"
+# "Written by AJ Bahnken"
 echo ''
 #Initial .bashrc edit
 echo '' >> ~/.bashrc
