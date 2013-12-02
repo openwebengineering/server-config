@@ -1,6 +1,6 @@
 # Install Python-related packages to given server(s)
 
-- hosts: $hosts
+- hosts: {{ hosts }}
   remote_user: ubuntu
   tasks:
 

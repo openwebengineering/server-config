@@ -1,6 +1,6 @@
 # Install base packages to new server
 
-- hosts: $hosts
+- hosts: {{ hosts }}
   remote_user: ubuntu
   tasks:
   - name: install base packages
