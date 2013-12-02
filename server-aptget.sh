@@ -26,6 +26,8 @@ apt-get install \
     memcached \
     bzr \
     unzip \
+    ruby1.9.1 \
+    golang-go \
 #    mysql-client \
 #    mysql-server \
 #    libmysqlclient-dev \
