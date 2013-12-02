@@ -1,0 +1,20 @@
+# Install Python-related packages to given server(s)
+
+- hosts: $hosts
+  remote_user: ubuntu
+  tasks:
+
+  - name: Install Python packages via apt
+    apt: pkg={{ item }} state=present
+    with_items:
+    - ipython
+    - python-dev
+    - python-distutils-extra
+    - python-pip
+    - python-setuptools
+
+  - name: Install Python packages via pip
+    pip: name={{ item }} state=present
+    with_items:
+    - virtualenv
+    - virtualenvwrapper
