@@ -1,0 +1,17 @@
+# Create new deployable git repo on server
+# Requires
+#   --extra-vars="hosts=??? project_name=???"
+
+- hosts: {{ hosts }}
+  remote_user: ubuntu
+  vars:
+    remote_user_home: /home/ubuntu
+  tasks:
+  - name: create bare git repo and containing directory
+    command: git init --bare {{ remote_user_home }}/code/repos/{{ project_name }}
+
+  - name: create code/checkouts/$project_name
+    file: path={{ remote_user_home }}/code/checkouts/{{ project_name }} state=directory
+
+  - name: cp post-receive $project_name/hooks/post-receive
+    command: cp {{ remote_user_home }}/code/post-receive {{ remote_user_home }}/code/repos/{{ project_name }}/hooks/
