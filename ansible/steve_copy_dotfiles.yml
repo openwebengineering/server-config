@@ -1,0 +1,23 @@
+# Copy Steve's dot files to new server
+
+- hosts: "{{ hosts }}"
+  vars:
+    user: ubuntu
+    remote_user_home: /home/{{ user }}
+    bashrc_steve: .bashrc_steve
+
+  tasks:
+  - name: copy .gitconfig
+    copy: src=~/.gitconfig dest={{ remote_user_home }}
+
+  - name: Add 'source ~/.bashrc_steve' to .bashrc
+    lineinfile: >
+      dest={{ remote_user_home }}/.bashrc
+      line='source {{ bashrc_steve }}'
+      state=present
+
+  - name: cp $local/.bashrc_steve $remote
+    copy: src=~/{{ bashrc_steve }} dest={{ remote_user_home }}/
+
+  - name: copy .emacs
+    copy: src=~/dpc/dot-files/.emacs-noerrors dest={{ remote_user_home }}/.emacs
