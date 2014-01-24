@@ -8,7 +8,12 @@
 
   tasks:
   - name: mkdir ~/code ~/code/{checkouts,repos}
-    shell: mkdir {{ remote_user_home }}/{{ item }}
+    file: >
+      path={{ remote_user_home }}/{{ item }}
+      state=directory
+      owner={{ user }}
+      group={{ user }}
+      mode=0775
     with_items:
     - code
     - code/repos
