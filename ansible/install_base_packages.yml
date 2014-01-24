@@ -2,7 +2,6 @@
 #   ansible-playbook install_base_packages.yml -e hosts=do1
 
 - hosts: {{ hosts }}
-  remote_user: ubuntu
 
   tasks:
   - name: install base packages
