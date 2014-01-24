@@ -1,7 +1,9 @@
-# Grands given user permission to do passwordless sudo. User must
-# already be a sudoer. Run with something like
+# Makes user a sudoer if s/he isn't already, then grants him/her
+# permission to do passwordless sudo. Run with something like
 #
 #   ansible-playbook pwless_sudo.yml -e 'hosts=do1 user=ubuntu'
+
+- include: make_user_sudoer.yml hosts={{ hosts }} user={{ user }}
 
 - hosts: "{{ hosts }}"
   sudo: true
