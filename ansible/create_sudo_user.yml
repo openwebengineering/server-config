@@ -1,0 +1,21 @@
+# Creates user and adds it to sudoers. Run with
+#   ansible-playbook create_sudo_user.yml -e 'hosts=do1 [user=ubuntu]'
+
+- hosts: "{{ hosts }}"
+  remote_user: root
+
+  vars:
+    user: ubuntu
+    remote_user_home: /home/{{ user }}
+
+  tasks:
+  - name: Create user account
+    shell: useradd -m -r -U -s /bin/bash -d /home/{{ user }} {{ user }}
+
+  - name: Add new user to sudoers file
+    lineinfile: >
+      backup=yes
+      dest=/etc/sudoers
+      line='{{ user }}	ALL=(ALL:ALL) ALL'
+      insertafter='root	ALL=\(ALL:ALL\) ALL'
+      state=present
