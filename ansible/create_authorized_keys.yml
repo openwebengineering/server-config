@@ -1,0 +1,25 @@
+# Copies given file to ~/.ssh/authorized_keys. Run with
+#   -e 'hosts=do1 user=ubuntu authorized_keys=some_key_file'
+
+- hosts: "{{ hosts }}"
+
+  vars:
+    user: ubuntu
+    remote_user_home: /home/{{ user }}
+
+  tasks:
+  - name: Create ~/.ssh directory if necessary
+    file: >
+      path={{ remote_user_home }}/.ssh
+      state=directory
+      owner={{ user }}
+      group={{ user }}
+      mode=0700
+
+  - name: Create ~/.ssh/authorized_keys
+    copy: >
+      src={{ authorized_keys }}
+      dest={{ remote_user_home }}/.ssh/authorized_keys
+      owner={{ user }}
+      group={{ user }}
+      mode=0644
