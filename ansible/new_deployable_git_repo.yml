@@ -1,6 +1,5 @@
-# Create new deployable git repo on server
-# Requires
-#   --extra-vars="hosts=??? project_name=???"
+# Create new deployable git repo on server. Run with something like
+#   ansible-playbook -e 'hosts=do1 project_name=syndicate_pro'
 
 - hosts: {{ hosts }}
   remote_user: ubuntu

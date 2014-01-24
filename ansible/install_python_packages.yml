@@ -1,9 +1,10 @@
 # Install Python-related packages to given server(s)
+#   ansible-playbook install_base_packages.yml -e hosts=do1
 
 - hosts: {{ hosts }}
   remote_user: ubuntu
-  tasks:
 
+  tasks:
   - name: Install Python packages via apt
     apt: pkg={{ item }} state=present
     with_items:
