@@ -1,0 +1,17 @@
+# Makes existing user a sudoer. Run with something like
+#
+#   ansible-playbook make_user_sudoer.yml -e 'hosts=do1 [user=ubuntu]'
+
+- hosts: "{{ hosts }}"
+  sudo: true
+
+  vars:
+    user: ubuntu
+
+  tasks:
+  - name: Add user to sudoers file
+    lineinfile: >
+      dest=/etc/sudoers
+      line='{{ user }}	ALL=(ALL:ALL) ALL'
+      insertafter='root	ALL=\(ALL:ALL\) ALL'
+      state=present
