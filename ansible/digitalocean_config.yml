@@ -1,0 +1,13 @@
+# Creates new user on the given server, adds it to sudoers, creates
+# ~/.ssh/authorized_keys, creates ~/code/{repos,checkouts}, installs
+# base system packages (via apt), and installs python packages (via
+# apt and pip). Run with something like
+#
+#   ansible-playbook digitalocean_config.yml -e \
+#   'hosts=do1 user=ubuntu password=s3cr3tp4ss authorized_keys=./authorized_keys_file'
+
+- include: create_sudo_user.yml        hosts={{ hosts }} user={{ user }} password={{ password }}
+- include: create_authorized_keys.yml  hosts={{ hosts }} user={{ user }} authorized_keys={{ authorized_keys }}
+- include: code_dirs.yml               hosts={{ hosts }} user={{ user }}
+- include: install_base_packages.yml   hosts={{ hosts }}
+- include: install_python_packages.yml hosts={{ hosts }}
