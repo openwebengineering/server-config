@@ -1,0 +1,19 @@
+# Disables password auth for given user (SSH key only). Run with
+# something like
+#
+# ansible-playbook disable_pw_auth.yml -e hosts=do1
+
+- hosts: "{{ hosts }}"
+  sudo: true
+
+  tasks:
+  - name: Disable SSH password auth (publickey only)
+    lineinfile: >
+      dest=/etc/ssh/sshd_config
+      backrefs=true
+      regexp='#?PasswordAuthentication yes'
+      line='PasswordAuthentication no'
+      state=present
+
+  - name: Restarting SSH service (so new config is acknowledged)
+    service: name=ssh state=restarted
