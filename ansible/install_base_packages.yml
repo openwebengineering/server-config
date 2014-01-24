@@ -1,7 +1,7 @@
 # Install base packages to new server. Run with
 #   ansible-playbook install_base_packages.yml -e hosts=do1
 
-- hosts: {{ hosts }}
+- hosts: "{{ hosts }}"
 
   tasks:
   - name: install base packages

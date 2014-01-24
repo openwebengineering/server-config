@@ -1,7 +1,7 @@
 # Install Python-related packages to given server(s)
 #   ansible-playbook install_base_packages.yml -e hosts=do1
 
-- hosts: {{ hosts }}
+- hosts: "{{ hosts }}"
 
   tasks:
   - name: Install Python packages via apt
