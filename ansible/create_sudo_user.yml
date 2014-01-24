@@ -1,5 +1,5 @@
 # Creates user and adds it to sudoers. Run with
-#   ansible-playbook create_sudo_user.yml -e 'hosts=do1 [user=ubuntu] password=s3cr3tp4ss'
+#   ansible-playbook create_sudo_user.yml -e 'hosts=do1 user=ubuntu password=s3cr3tp4ss'
 # Assumes that openssl is installed on the hosts
 
 - hosts: "{{ hosts }}"
@@ -13,9 +13,4 @@
   - name: Create user account
     shell: useradd -m -r -U -p `openssl passwd {{ password }}` -s /bin/bash -d /home/{{ user }} {{ user }}
 
-  - name: Add new user to sudoers file
-    lineinfile: >
-      dest=/etc/sudoers
-      line='{{ user }}	ALL=(ALL:ALL) ALL'
-      insertafter='root	ALL=\(ALL:ALL\) ALL'
-      state=present
+- include: make_user_sudoer.yml hosts={{ hosts }} user={{ user }}
