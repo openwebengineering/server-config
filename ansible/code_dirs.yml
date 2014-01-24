@@ -1,0 +1,15 @@
+# mkdir ~/code ~/code/{checkouts,repos} on given server(s)
+
+- hosts: "{{ hosts }}"
+
+  vars:
+    user: ubuntu
+    remote_user_home: /home/{{ user }}
+
+  tasks:
+  - name: mkdir ~/code ~/code/{checkouts,repos}
+    shell: mkdir {{ remote_user_home }}/{{ item }}
+    with_items:
+    - code
+    - code/repos
+    - code/checkouts
