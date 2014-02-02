@@ -1,0 +1,32 @@
+# Add a vhost to the given hosts using vhost_simple.j2.  Run with
+#   ansible-playbook add_vhost.yml -e 'hosts=ow1 project_name=syndicate_pro domain=syndicatepro.com [user=ubuntu]'
+
+- hosts: "{{ hosts }}"
+  sudo: True
+
+  vars:
+    user: ubuntu
+    remote_user_home: /home/{{ user }}
+    project_root: "{{ remote_user_home }}/code/checkouts/{{ project_name }}"
+    vhost_template: vhost_simple.j2
+
+  tasks:
+  - name: Install new Apache vhost '{{ domain }}'
+    template: >
+      src={{ vhost_template }}
+      dest=/etc/apache2/sites-available/{{ project_name }}
+      owner=root
+      group=root
+      mode=0644
+
+  - name: Enable mod_rewrite
+    command: sudo a2enmod rewrite
+
+  - name: Activates new vhost
+    command: a2ensite {{ project_name }}
+    notify:
+    - restart apache
+
+  handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
