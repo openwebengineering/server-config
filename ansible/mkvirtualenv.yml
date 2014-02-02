@@ -1,0 +1,13 @@
+# Creates a virtualenv with the given name using mkvirtualenv. Run with
+#   ansible-playbook mkvirtualenv.yml -e 'hosts=ow1 virtualenv=syndicate_pro"
+
+- hosts: "{{ hosts }}"
+
+  tasks:
+  - name: Run 'mkvirtualenv {{ virtualenv }}'
+    shell: >
+      executable=/bin/bash
+      source `which virtualenvwrapper.sh` && mkvirtualenv {{ virtualenv }}
+    register: run_cmd
+
+  - debug: var=run_cmd.stdout_lines
