@@ -1,0 +1,14 @@
+# Install base packages to new server. Run with
+#   ansible-playbook install_apache_postgres.yml -e hosts=do1
+
+- hosts: "{{ hosts }}"
+
+  tasks:
+  - name: Install Django-ready Apache and Postgres
+    apt: pkg={{ item }} state=present
+    with_items:
+    - apache2
+    - apache2-threaded-dev
+    - postgresql-client
+    - postgresql-server-dev-all
+    - postgresql-9.1
