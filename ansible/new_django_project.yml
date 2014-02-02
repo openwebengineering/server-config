@@ -1,0 +1,5 @@
+# Creates a virtualenv then a new deployable git repo.  Run with
+#   ansible-playbook new_django_project.yml -e 'hosts=ow1 project_name=syndicate_pro"
+
+- include: mkvirtualenv.yml             hosts={{ hosts }} virtualenv={{ project_name }}
+- include: new_deployable_git_repo.yml  hosts={{ hosts }} project_name={{ project_name }}
