@@ -1,0 +1,5 @@
+# Runs 'pip install -r requirements.txt' in the given virtualenv. Run
+# with something like
+#   ansible-playbook pip_install_requirements.yml -e 'hosts=ow1 virtualenv=syndicate_pro'
+
+- include: cmd.yml hosts={{ hosts }} virtualenv={{ virtualenv }} cmd="pip install -r requirements.txt"
