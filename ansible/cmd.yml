@@ -1,0 +1,22 @@
+# Run the given command within the given project's virtualenv. Run with something like
+#
+#   ansible-playbook scripts/ansible/cmd.yml -e 'hosts=ow1 virtualenv=syndicate_pro cmd="ls -l" [user=ubuntu]'
+
+- hosts: "{{ hosts }}"
+
+  vars:
+    user: ubuntu
+    remote_user_home: /home/{{ user }}
+    project_root: "{{ remote_user_home }}/code/checkouts/{{ virtualenv }}"
+    source_virtualenvwrapper: source `which virtualenvwrapper.sh`
+    activate: source {{ remote_user_home }}/.virtualenvs/{{ virtualenv }}/bin/activate
+
+  tasks:
+  - name: Run {{ cmd }} within {{ virtualenv }}'s virtualenv
+    shell: >
+      executable=/bin/bash
+      chdir={{ project_root }}
+      source ~/.bashrc && {{ source_virtualenvwrapper }} && workon {{ virtualenv }} && {{ cmd }}
+    register: run_cmd
+
+  - debug: var=run_cmd.stdout_lines
