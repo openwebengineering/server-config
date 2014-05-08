@@ -5,6 +5,7 @@
     user: ubuntu
     remote_user_home: /home/{{ user }}
     bashrc_steve: .bashrc_steve
+    dot_emacs_source: ~/.emacs
 
   tasks:
   - name: copy .gitconfig
@@ -20,4 +21,4 @@
     copy: src=~/{{ bashrc_steve }} dest={{ remote_user_home }}/
 
   - name: copy .emacs
-    copy: src=~/dpc/dot-files/.emacs-noerrors dest={{ remote_user_home }}/.emacs
+    copy: src={{ dot_emacs_source }} dest={{ remote_user_home }}/.emacs
