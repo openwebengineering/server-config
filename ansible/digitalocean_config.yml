@@ -4,7 +4,7 @@
 # apt and pip). Run with something like
 #
 #   ansible-playbook digitalocean_config.yml -e \
-#   'hosts=do1 user=ubuntu password=s3cr3tp4ss authorized_keys=./authorized_keys_file'
+#   'hosts=do1_root user=ubuntu password=s3cr3tp4ss authorized_keys=./authorized_keys_file' -k
 
 - include: create_sudo_user.yml        hosts={{ hosts }} user={{ user }} password={{ password }}
 - include: create_authorized_keys.yml  hosts={{ hosts }} user={{ user }} authorized_keys={{ authorized_keys }}
