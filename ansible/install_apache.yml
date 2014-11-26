@@ -1,0 +1,11 @@
+# Install base packages to new server. Run with
+#   ansible-playbook install_apache.yml -e hosts=do1
+
+- hosts: "{{ hosts }}"
+
+  tasks:
+  - name: Install Apache
+    apt: pkg={{ item }} state=present
+    with_items:
+    - apache2
+    - apache2-threaded-dev
