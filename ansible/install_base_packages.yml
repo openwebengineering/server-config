@@ -5,7 +5,7 @@
 
   tasks:
   - name: install base packages
-    apt: pkg={{ item }} state=present
+    apt: pkg={{ item }} state=present update_cache=true
     with_items:
     - curl
     - emacs23
